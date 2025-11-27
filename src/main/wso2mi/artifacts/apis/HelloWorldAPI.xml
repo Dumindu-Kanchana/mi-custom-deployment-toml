@@ -1,11 +1,16 @@
 <api xmlns="http://ws.apache.org/ns/synapse" name="HelloWorldAPI" context="/hello">
     <resource methods="GET" uri-template="/world">
         <inSequence>
+            <variable name="envVar" expression="${configs.sv_hitreports_db_url}" type="STRING"/>
+            <log category="INFO">
+                <message>Environment Variable: ${vars.envVar}</message>
+            </log>
             <payloadFactory media-type="json">
                 <format>
                     {
                         "message": "Hello World",
-                        "status": "success"
+                        "status": "success",
+                        "environmentVariable": "${vars.envVar}"
                     }
                 </format>
             </payloadFactory>
