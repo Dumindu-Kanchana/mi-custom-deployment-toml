@@ -2,6 +2,11 @@
 hostname = "localhost"
 # offset  = 10
 
+[secrets]
+secret_url = "$env{sv_hitreports_db_url}"
+secret_username = "$env{sv_hitreports_db_user}"
+secret_password = "$env{sv_hitreports_db_pwd}"
+
 [user_store]
 type = "read_only_ldap"
 
@@ -19,9 +24,9 @@ algorithm = "AES"
 
 [[datasource]]
 id = "hitReports"
-url = "$secret{sv_hitreports_db_url}"
-username = "$secret{sv_hitreports_db_user}"
-password = "$secret{sv_hitreports_db_pwd}"
+url = "$secret{secret_url}"
+username = "$secret{secret_username}"
+password = "$secret{secret_password}"
 driver = "oracle.jdbc.driver.OracleDriver"
 pool_options.minEvictableIdleTimeMillis = "25000"
 pool_options.testWhileIdle = "true"
