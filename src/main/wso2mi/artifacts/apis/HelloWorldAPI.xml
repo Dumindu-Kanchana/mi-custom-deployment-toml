@@ -2,15 +2,20 @@
     <resource methods="GET" uri-template="/world">
         <inSequence>
             <variable name="envVar" expression="get-property('env','sv_hitreports_db_url')" type="STRING"/>
+            <variable name="envVarsec"  expression="${wso2-vault('sv_hitreports_db_url')}" type="STRING"/>
             <log category="INFO">
                 <message>Environment Variable: ${vars.envVar}</message>
+            </log>
+            <log category="INFO">
+                <message>Environment Variable envVarsec: ${vars.envVarsec}</message>
             </log>
             <payloadFactory media-type="json">
                 <format>
                     {
                         "message": "Hello World",
                         "status": "success",
-                        "environmentVariable": "${vars.envVar}"
+                        "environmentVariable": "${vars.envVar}",
+                        "environmentVariable envVarsec": "${vars.envVarsec}"
                     }
                 </format>
             </payloadFactory>
