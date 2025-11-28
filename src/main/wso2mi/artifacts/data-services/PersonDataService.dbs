@@ -1,7 +1,7 @@
 <data name="PersonDataService"  serviceStatus="active" transports="http https local">
    <config enableOData="false" id="OracleDataSource">
       <property name="driverClassName">oracle.jdbc.driver.OracleDriver</property>
-      <property name="url">jdbc:oracle:thin:@localhost:1521/FREEPDB1</property>
+	   <property xmlns:svns="http://org.wso2.securevault/configuration" name="url" svns:secretAlias="sv_hitreports_db_url" />
       <property xmlns:svns="http://org.wso2.securevault/configuration" name="username" svns:secretAlias="sv_hitreports_db_user" />
       <property name="password">wso2</property>
       <property name="minEvictableIdleTimeMillis">25000</property>
