@@ -1,0 +1,37 @@
+<data name="PersonDataService"  serviceStatus="active" transports="http https local">
+   <config enableOData="false" id="OracleDataSource">
+      <property name="driverClassName">oracle.jdbc.driver.OracleDriver</property>
+      <property name="url">jdbc:oracle:thin:@localhost:1521/FREEPDB1</property>
+      <property xmlns:svns="http://org.wso2.securevault/configuration" name="username" svns:secretAlias="sv_hitreports_db_user" />
+      <property name="password">wso2</property>
+      <property name="minEvictableIdleTimeMillis">25000</property>
+      <property name="testWhileIdle">true</property>
+      <property name="testOnBorrow">true</property>
+      <property name="validationQuery">SELECT 1 FROM DUAL</property>
+      <property name="validationInterval">15000</property>
+      <property name="maxActive">100</property>
+      <property name="maxAge">120000</property>
+      <property name="removeAbandoned">true</property>
+      <property name="removeAbandonedTimeout">60</property>
+      <property name="logAbandoned">true</property>
+   </config>
+   
+   <query id="getPersonsQuery" useConfig="OracleDataSource">
+      <sql>SELECT ID, NAME, AGE FROM PERSON</sql>
+      <result outputType="json">
+         {
+            "persons": 
+               {
+                  "id": "$ID",
+                  "name": "$NAME",
+                  "age": "$AGE"
+               }
+            
+         }
+      </result>
+   </query>
+   
+   <resource method="GET" path="persons">
+      <call-query href="getPersonsQuery"/>
+   </resource>
+</data>
